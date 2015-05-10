@@ -1,8 +1,15 @@
 ## Requires
 require(dplyr)
 
+fileName <- "household_power_consumption.txt"
+
+## Check the existance of the data file
+if (!file.exists(fileName)) {    
+    stop("Data file not found! - The file household_power_consumption.txt should be in the current directory")
+}
+
 ## Read the whole data file (some waiting is needed)
-data <- read.csv("household_power_consumption.txt", sep=";", dec=".", header=TRUE)
+data <- read.csv(fileName, sep=";", dec=".", header=TRUE)
 
 ## Extract only period of interest data excluding also data missing rows
 ## Another option was to first convert to date/time and then extract using other date/time filter function
