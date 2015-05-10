@@ -10,16 +10,16 @@ if (!file.exists(fileName)) {
 }
 
 ## Read the whole data file (some waiting is needed)
-data <- read.csv(fileName, sep=";", dec=".", header=TRUE)
+data <- read.csv(fileName, sep=";", dec=".", header=TRUE, nrows=2075259, stringsAsFactors=FALSE)
 
 ## Extract only period of interest data excluding also data missing rows
 ## Another option was to first convert to date/time and then extract using other date/time filter function
 dataCleaned <- filter(data, (Date=="1/2/2007" | Date=="2/2/2007") & Global_active_power != "?")
 
 ## Convert Sub metering values data
-subMetering1 <- as.numeric(as.character(dataCleaned$Sub_metering_1))
-subMetering2 <- as.numeric(as.character(dataCleaned$Sub_metering_2))
-subMetering3 <- as.numeric(as.character(dataCleaned$Sub_metering_3))
+subMetering1 <- as.numeric(dataCleaned$Sub_metering_1)
+subMetering2 <- as.numeric(dataCleaned$Sub_metering_2)
+subMetering3 <- as.numeric(dataCleaned$Sub_metering_3)
 
 ## Define a variables with the concatenated date/time string format
 dataFormat <- "%d/%m/%Y %H:%M:%S"

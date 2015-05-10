@@ -10,7 +10,7 @@ if (!file.exists(fileName)) {
 }
 
 ## Read the whole data file (some waiting is needed)
-data <- read.csv(fileName, sep=";", dec=".", header=TRUE)
+data <- read.csv(fileName, sep=";", dec=".", header=TRUE, nrows=2075259, stringsAsFactors=FALSE)
 
 ## Extract only period of interest data excluding also data missing rows
 ## Another option was to first convert to date/time and then extract using other date/time filter function
@@ -31,7 +31,7 @@ if (.Platform$OS.type == "unix") {
 
 ################ Graph 1 - row 1/col 1 ################
 ## Convert values data
-valuesData <- as.numeric(as.character(dataCleaned$Global_active_power))
+valuesData <- as.numeric(dataCleaned$Global_active_power)
 
 ## Define a variables with the concatenated date/time string format
 dataFormat <- "%d/%m/%Y %H:%M:%S"
@@ -44,13 +44,13 @@ plot(datesTimesData, valuesData, type="l", lwd=1, xlab="", ylab="Global Active P
 
 ################ Graph 2 - row 1/col 2 ###############
 ## Plot the Voltage graph setting the type to line, leaving the color to default black, setting the x and axes labels to required values
-plot(datesTimesData, as.numeric(as.character(dataCleaned$Voltage)), type="l", lwd=1, xlab="datetime", ylab="Voltage")
+plot(datesTimesData, as.numeric(dataCleaned$Voltage), type="l", lwd=1, xlab="datetime", ylab="Voltage")
 
 ################ Graph 3 - row 2/col 1 ################
 ## Convert Sub metering values data
-subMetering1 <- as.numeric(as.character(dataCleaned$Sub_metering_1))
-subMetering2 <- as.numeric(as.character(dataCleaned$Sub_metering_2))
-subMetering3 <- as.numeric(as.character(dataCleaned$Sub_metering_3))
+subMetering1 <- as.numeric(dataCleaned$Sub_metering_1)
+subMetering2 <- as.numeric(dataCleaned$Sub_metering_2)
+subMetering3 <- as.numeric(dataCleaned$Sub_metering_3)
 
 ## Define a variables with the concatenated date/time string format
 dataFormat <- "%d/%m/%Y %H:%M:%S"
@@ -72,7 +72,7 @@ legend("topright", lty=c(1,1), col = c("black", "blue", "red"), legend = c("Sub_
 
 ################ Graph 4 - row 2/col 2 ################
 ## Plot the Global reactive power graph setting the type to line, leaving the color to default black, setting the x and axes labels to required values
-plot(datesTimesData, as.numeric(as.character(dataCleaned$Global_reactive_power)), type="l", lwd=1, xlab="datetime", ylab="Global_reactive_power")
+plot(datesTimesData, as.numeric(dataCleaned$Global_reactive_power), type="l", lwd=1, xlab="datetime", ylab="Global_reactive_power")
 
 ## Close the PNG device
 dev.off()

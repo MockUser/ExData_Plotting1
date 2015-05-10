@@ -10,14 +10,14 @@ if (!file.exists(fileName)) {
 }
 
 ## Read the whole data file (some waiting is needed)
-data <- read.csv(fileName, sep=";", dec=".", header=TRUE)
+data <- read.csv(fileName, sep=";", dec=".", header=TRUE, nrows=2075259, stringsAsFactors=FALSE)
 
 ## Extract only period of interest data excluding also data missing rows
 ## Another option was to first convert to date/time and then extract using other date/time filter function
 dataCleaned <- filter(data, (Date=="1/2/2007" | Date=="2/2/2007") & Global_active_power != "?")
 
 ## Convert values data
-valuesData <- as.numeric(as.character(dataCleaned$Global_active_power))
+valuesData <- as.numeric(dataCleaned$Global_active_power)
 
 ## Define a variables with the concatenated date/time string format
 dataFormat <- "%d/%m/%Y %H:%M:%S"
